@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 export interface AuthRequest extends Request {
-  user?: { id: string };
+  user?: { id: string; email: string };
 }
 
 export function authMiddleware(req: AuthRequest, res: Response, next: NextFunction) {
@@ -27,7 +27,7 @@ export function authMiddleware(req: AuthRequest, res: Response, next: NextFuncti
       return res.status(401).json({ success: false, message: "Invalid token payload" });
     }
 
-    req.user = { id: decoded.id as string };
+    req.user = { id: decoded.id as string, email: decoded.email as string };
 
     return next();
   } catch (error: any) {
