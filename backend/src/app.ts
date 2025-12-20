@@ -16,7 +16,7 @@ app.use(cors(
 ));
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/", (req: express.Request, res: express.Response) => {
   res.send("Task Manager Backend is running 🚀");
 });
 

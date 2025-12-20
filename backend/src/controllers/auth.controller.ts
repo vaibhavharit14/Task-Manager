@@ -7,8 +7,8 @@ import { AuthRequest, authMiddleware } from "../middleware/auth.middleware";
 const router = Router();
 const prisma = new PrismaClient();
 
-const signToken = (userId: string) =>
-  jwt.sign({ id: userId }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+const signToken = (userId: string, email: string) =>
+  jwt.sign({ id: userId, email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
 
 const sendSuccess = (
   res: Response,
@@ -40,7 +40,7 @@ router.post("/register", async (req: Request, res: Response) => {
       data: { name, email, password: hashedPassword },
     });
 
-    const token = signToken(user.id);
+    const token = signToken(user.id, user.email);
 
     return sendSuccess(
       res,
@@ -80,7 +80,7 @@ router.post("/login", async (req: Request, res: Response) => {
       return sendError(res, "Invalid credentials", 400);
     }
 
-    const token = signToken(user.id);
+    const token = signToken(user.id, user.email);
 
     return sendSuccess(
       res,
