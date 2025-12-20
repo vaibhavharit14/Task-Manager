@@ -128,8 +128,8 @@ export default function Tasks() {
       </div>
 
       {/* Toolbar / Controls */}
-      <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-8 flex flex-wrap gap-4 items-center">
-        <div className="flex-grow min-w-[200px] relative">
+      <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-8 flex flex-col md:flex-row gap-4 items-stretch md:items-center">
+        <div className="flex-grow relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
             type="text"
@@ -140,11 +140,11 @@ export default function Tasks() {
           />
         </div>
 
-        <div className="flex flex-wrap gap-3 items-center ml-auto">
-          <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+        <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
+          <div className="flex-grow sm:flex-grow-0 flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg border border-slate-200">
             <Filter size={16} className="text-slate-500 ml-2" />
             <select
-              className="bg-transparent text-sm font-bold text-slate-600 focus:outline-none pr-4"
+              className="bg-transparent text-sm font-bold text-slate-600 focus:outline-none pr-4 w-full sm:w-auto"
               value={filter.status}
               onChange={(e) => setFilter(prev => ({ ...prev, status: e.target.value }))}
             >
@@ -158,7 +158,7 @@ export default function Tasks() {
             <div className="w-px h-4 bg-slate-200 mx-1"></div>
 
             <select
-              className="bg-transparent text-sm font-bold text-slate-600 focus:outline-none pr-4"
+              className="bg-transparent text-sm font-bold text-slate-600 focus:outline-none pr-4 w-full sm:w-auto"
               value={filter.priority}
               onChange={(e) => setFilter(prev => ({ ...prev, priority: e.target.value }))}
             >
@@ -170,10 +170,10 @@ export default function Tasks() {
             </select>
           </div>
 
-          <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg border border-slate-200 px-3">
+          <div className="flex-grow sm:flex-grow-0 flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg border border-slate-200 px-3">
             <SortDesc size={16} className="text-slate-500" />
             <select
-              className="bg-transparent text-sm font-bold text-slate-600 focus:outline-none"
+              className="bg-transparent text-sm font-bold text-slate-600 focus:outline-none w-full sm:w-auto"
               value={sort}
               onChange={(e) => setSort(e.target.value as any)}
             >

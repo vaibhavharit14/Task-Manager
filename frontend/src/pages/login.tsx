@@ -25,20 +25,20 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 p-6">
       <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
         {/* Logo + Heading */}
-        <div className="text-center mb-10">
-          <div className="inline-flex p-4 bg-white/10 rounded-3xl backdrop-blur-sm border border-white/20 mb-4 shadow-2xl">
-            <ListTodo size={48} className="text-white" />
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="inline-flex p-3 sm:p-4 bg-white/10 rounded-2xl sm:rounded-3xl backdrop-blur-sm border border-white/20 mb-4 shadow-2xl">
+            <ListTodo size={40} className="text-white sm:w-12 sm:h-12" />
           </div>
-          <h1 className="text-4xl font-black text-white tracking-tighter uppercase">Task Manager</h1>
-          <p className="text-indigo-100 font-medium opacity-80 mt-1 italic">
+          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tighter uppercase">Task Manager</h1>
+          <p className="text-indigo-100 font-medium opacity-80 mt-1 italic text-sm sm:text-base px-4">
             Conquer your day, one task at a time.
           </p>
         </div>
 
         {/* Form Container with gradient background */}
-        <div className="rounded-[2.5rem] p-10 bg-gradient-to-br from-indigo-700 via-indigo-800 to-violet-900 shadow-2xl border border-indigo-500/30">
-          <h2 className="text-2xl font-black text-white mb-8 flex items-center gap-2">
-            <LogIn className="text-indigo-200" size={24} />
+        <div className="rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 bg-gradient-to-br from-indigo-700 via-indigo-800 to-violet-900 shadow-2xl border border-indigo-500/30">
+          <h2 className="text-xl sm:text-2xl font-black text-white mb-6 sm:mb-8 flex items-center gap-2">
+            <LogIn className="text-indigo-200" size={20} />
             Welcome Back
           </h2>
 
