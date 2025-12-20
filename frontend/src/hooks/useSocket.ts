@@ -8,7 +8,7 @@ export function useSocket() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     // Connect to backend URL (ensure VITE_API_URL is set, fallback to localhost:5000 if needed)
-    const socket = io("http://localhost:5001", {
+    const socket = io(import.meta.env.VITE_API_URL || "http://localhost:5000", {
       auth: token ? { token } : undefined,
     });
 

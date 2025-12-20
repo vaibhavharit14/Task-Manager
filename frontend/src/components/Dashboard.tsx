@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import apiClient from "../utils/apiClient";
 
 type Task = {
   id: string;
@@ -12,13 +13,8 @@ export default function Dashboard() {
   const { data: tasks, isLoading, error } = useQuery<Task[]>({
     queryKey: ["dashboard"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5001/tasks/dashboard", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ token header
-        },
-      });
-      const result = await res.json();
-      return result.data; // ✅ सिर्फ tasks array return करो
+      const res = await apiClient.get("/tasks/dashboard");
+      return res.data.data;
     },
   });
 
@@ -42,10 +38,10 @@ export default function Dashboard() {
               Priority:{" "}
               <span
                 className={`px-2 py-1 rounded ${task.priority === "high"
-                    ? "bg-red-100 text-red-700"
-                    : task.priority === "medium"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : "bg-green-100 text-green-700"
+                  ? "bg-red-100 text-red-700"
+                  : task.priority === "medium"
+                    ? "bg-yellow-100 text-yellow-700"
+                    : "bg-green-100 text-green-700"
                   }`}
               >
                 {task.priority}
@@ -55,10 +51,10 @@ export default function Dashboard() {
               Status:{" "}
               <span
                 className={`px-2 py-1 rounded ${task.status === "completed"
-                    ? "bg-green-100 text-green-700"
-                    : task.status === "in-progress"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : "bg-gray-100 text-gray-700"
+                  ? "bg-green-100 text-green-700"
+                  : task.status === "in-progress"
+                    ? "bg-yellow-100 text-yellow-700"
+                    : "bg-gray-100 text-gray-700"
                   }`}
               >
                 {task.status}
