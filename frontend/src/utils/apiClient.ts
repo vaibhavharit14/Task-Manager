@@ -1,9 +1,14 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
-export const API_URL = `${API_BASE}/api`;
+const API_BASE = import.meta.env.VITE_API_URL;
 
-console.log("Current API URL:", API_URL);
+if (!API_BASE && import.meta.env.PROD) {
+  console.error("❌ CRITICAL ERROR: VITE_API_URL is not defined! Your Vercel build is defaulting to localhost. Please set VITE_API_URL in Vercel settings and REDEPLOY.");
+}
+
+export const API_URL = `${API_BASE || "http://localhost:5000"}/api`;
+
+console.log("🚀 Active Backend URL:", API_URL);
 
 const apiClient = axios.create({
   baseURL: API_URL,
