@@ -6,6 +6,7 @@ import apiClient from "../utils/apiClient";
 import { useQueryClient } from "@tanstack/react-query";
 import { Priority, Status } from "../types/task";
 import { X } from "lucide-react";
+import { AxiosError } from "axios";
 
 const createTaskSchema = z.object({
     title: z.string().min(1, "Title is required").max(100),
@@ -42,8 +43,14 @@ export default function CreateTaskModal({ isOpen, onClose }: Props) {
             queryClient.invalidateQueries({ queryKey: ["dashboard"] });
             reset();
             onClose();
-        } catch (err: any) {
-            setError(err.response?.data?.message || "Failed to create task");
+        } catch (err: unknown) {
+            if (err instanceof AxiosError && err.response?.data?.message) {
+                setError(err.response.data.message);
+            } else if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Failed to create task");
+            }
         }
     };
 

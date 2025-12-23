@@ -15,9 +15,13 @@ export default function Login() {
       await login(data.email, data.password);
       reset();
       navigate("/dashboard");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Login error:", err);
-      alert(err?.message || "Login failed");
+      if (err instanceof Error) {
+        alert(err.message || "Login failed");
+      } else {
+        alert("Login failed");
+      }
     }
   };
 

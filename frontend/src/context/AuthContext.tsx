@@ -1,17 +1,9 @@
-import { createContext, useState, useEffect, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import apiClient from "../utils/apiClient";
+import { AuthContext } from "./AuthContextTypes";
+import { AxiosError } from "axios";
 
 type User = { id: string; name: string; email: string };
-
-type AuthContextType = {
-    user: User | null;
-    loading: boolean;
-    login: (email: string, password: string) => Promise<void>;
-    register: (name: string, email: string, password: string) => Promise<void>;
-    logout: () => void;
-};
-
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
@@ -51,8 +43,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             } else {
                 throw new Error(result.message || "Login failed");
             }
-        } catch (err: any) {
-            console.error("Login error:", err.response?.data || err.message);
+        } catch (err: unknown) {
+            if (err instanceof AxiosError && err.response?.data) {
+                console.error("Login error:", err.response.data);
+                throw err;
+            } else if (err instanceof Error) {
+                console.error("Login error:", err.message);
+                throw err;
+            }
+            console.error("Login error:", err);
             throw err;
         }
     };
@@ -72,8 +71,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             } else {
                 throw new Error(result.message || "Registration failed");
             }
-        } catch (err: any) {
-            console.error("Register error:", err.response?.data || err.message);
+        } catch (err: unknown) {
+            if (err instanceof AxiosError && err.response?.data) {
+                console.error("Register error:", err.response.data);
+                throw err;
+            } else if (err instanceof Error) {
+                console.error("Register error:", err.message);
+                throw err;
+            }
+            console.error("Register error:", err);
             throw err;
         }
     };

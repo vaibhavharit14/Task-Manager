@@ -31,7 +31,7 @@ export default function Tasks() {
   });
 
   const updateTaskMutation = useMutation({
-    mutationFn: async ({ id, ...data }: any) => {
+    mutationFn: async ({ id, ...data }: { id: string } & Record<string, unknown>) => {
       return apiClient.put(`/tasks/${id}`, data);
     },
     onSuccess: () => {
@@ -175,7 +175,7 @@ export default function Tasks() {
             <select
               className="bg-transparent text-sm font-bold text-slate-600 focus:outline-none w-full sm:w-auto"
               value={sort}
-              onChange={(e) => setSort(e.target.value as any)}
+              onChange={(e) => setSort(e.target.value as "date-asc" | "date-desc" | "")}
             >
               <option value="">Sort</option>
               <option value="date-asc">Due Date (Earliest)</option>

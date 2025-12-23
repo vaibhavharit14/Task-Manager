@@ -1,0 +1,24 @@
+﻿
+D:\FrontEnd\Github\Task Manager Project\frontend\src\components\CreateTaskModal.tsx
+  45:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\FrontEnd\Github\Task Manager Project\frontend\src\components\EditTaskModal.tsx
+  54:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\FrontEnd\Github\Task Manager Project\frontend\src\context\AuthContext.tsx
+  14:14  error  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file  react-refresh/only-export-components
+  54:23  error  Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+  75:23  error  Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+
+D:\FrontEnd\Github\Task Manager Project\frontend\src\pages\login.tsx
+  18:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\FrontEnd\Github\Task Manager Project\frontend\src\pages\register.tsx
+  23:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\FrontEnd\Github\Task Manager Project\frontend\src\pages\tasks.tsx
+   34:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  178:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 9 problems (9 errors, 0 warnings)
+

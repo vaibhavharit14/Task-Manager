@@ -6,6 +6,7 @@ import apiClient from "../utils/apiClient";
 import { useQueryClient } from "@tanstack/react-query";
 import { Priority, Status, type Task } from "../types/task";
 import { X } from "lucide-react";
+import { AxiosError } from "axios";
 
 const taskSchema = z.object({
     title: z.string().min(1, "Title is required").max(100),
@@ -51,8 +52,14 @@ export default function EditTaskModal({ isOpen, onClose, task }: Props) {
             queryClient.invalidateQueries({ queryKey: ["tasks"] });
             queryClient.invalidateQueries({ queryKey: ["dashboard"] });
             onClose();
-        } catch (err: any) {
-            setError(err.response?.data?.message || "Failed to update task");
+        } catch (err: unknown) {
+            if (err instanceof AxiosError && err.response?.data?.message) {
+                setError(err.response.data.message);
+            } else if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Failed to update task");
+            }
         }
     };
 

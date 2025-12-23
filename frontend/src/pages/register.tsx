@@ -3,6 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { User, Mail, Lock, UserPlus, ListTodo } from "lucide-react";
+import { AxiosError } from "axios";
 
 type RegisterForm = { name: string; email: string; password: string };
 
@@ -20,9 +21,15 @@ export default function Register() {
       await registerUser(data.name, data.email, data.password);
       reset();
       navigate("/login");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Registration error:", err);
-      setServerError(err?.response?.data?.message || err?.message || "Registration failed");
+      if (err instanceof AxiosError && err.response?.data?.message) {
+        setServerError(err.response.data.message);
+      } else if (err instanceof Error) {
+        setServerError(err.message || "Registration failed");
+      } else {
+        setServerError("Registration failed");
+      }
     } finally {
       setLoading(false);
     }
